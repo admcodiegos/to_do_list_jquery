@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do List</title>
+    <style>
+         body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            background-color: #272727;
+        }
+        .container {
+            width: 500px;
+            margin: 20px auto;
+        }
+        .form {
+            background-color: #3e3e3ec0;
+            border-radius: 6px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            flex: 1;
+        }
+        .input:focus , .add:focus{
+            outline: none;
+        }
+        .add {
+            border: none;
+            background-color: #03FA6E;
+            color: #505050;
+            padding: 10px;
+            border-radius: 6px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        .tasks {
+            background-color: #3e3e3ec0;
+            margin-top: 20px;
+            border-radius: 6px;
+            padding: 20px;
+        }
+        .tasks .task {
+            background-color: #505050;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            color: #fff;
+        }
+        .tasks .task:not(:last-child) {
+            margin-bottom: 15px;
+        }
+        .tasks .task:hover {
+            color: #03FA6E;
+        }
+        .tasks .task.done {
+            opacity: 0.5;
+            position: relative;
+        }
+        .task.done::after {
+            position: absolute;
+            content: "";
+        }
+        .tasks .task span { 
+            font-weight: bold;
+            font-size: 10px;
+            background-color: red;
+            color: #505050;
+            padding: 2px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .delete-all {
+            width: calc(100% - 25px);
+            margin: auto;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+            color: #505050;
+            background-color: #03FA6E;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <input type="text" class="input">
+            <input type="submit" value="Adicionar" class="add">
+        </div>
+        <div class="tasks"></div>
+        <div class="delete-all">Deletar tudo</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+
+            $('.add').click(function(e){
+                e.preventDefault();
+                let toDoItem = $('.input').val()
+                $('.tasks').append(`<div class="task">${toDoItem}</div>`)
+                    .on('click', 'div', function (){
+                        $(this).remove();
+                    });
+                $('.input').val('')
+            });
+
+            $('.delete-all').click(function(){
+              $('.tasks').empty();
+            })
+
+        })
+    </script>
+</body>
+</html>
